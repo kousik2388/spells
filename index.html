@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>SPELLS v11 — FROM MANTRAM</title>
+<title>SPELLS v14 — FROM MANTRAM</title>
 <style>
 :root{
   --bg:#0a0e1a; --bg2:#101629; --panel:#161d33; --panel2:#1c2440;
@@ -206,7 +206,7 @@ footer b{color:var(--gold)}
 @media (max-width:1020px){ .editor-grid{grid-template-columns:1fr} }
 
 
-/* ===== SPELLS v11 PROFESSIONAL UI REVAMP ===== */
+/* ===== SPELLS v13 PROFESSIONAL UI REVAMP ===== */
 :root{
   --app-bg:#070a12; --surface:#0f1424; --surface2:#151b2e; --glass:rgba(15,20,36,.78);
   --line:rgba(159,176,255,.16); --line2:rgba(255,255,255,.08); --accent:#ffb24a; --accent2:#ff7a1a;
@@ -246,7 +246,7 @@ main{max-width:1440px;padding:24px 20px}.panel,.feature,.genre-card,.path-card,.
   <div class="brand-mark">
     <div class="brand-orb">✦</div>
     <div class="brand-copy">
-      <strong>SPELLS <span>v11</span></strong>
+      <strong>SPELLS <span>v14</span></strong>
       <em>FROM MANTRAM</em>
     </div>
   </div>
@@ -268,12 +268,12 @@ main{max-width:1440px;padding:24px 20px}.panel,.feature,.genre-card,.path-card,.
     <p class="tag">Create a browser game from a template or from scratch, then keep editing it as your active project.</p>
     <div class="cta-row">
       <button class="btn primary" onclick="App.go('new')">＋ &nbsp;New Game</button>
-      <button class="btn cyan" onclick="App.loadProject(true)">📂 Continue Saved Project</button>
+      <button class="btn cyan" onclick="App.loadProjectFromFile()">📂 Open Project File</button>
     </div>
-    <p class="note">No AI in this version. New Project opens the creator flow; Continue loads your active saved project.</p>
+    <p class="note">No AI in this version. Save your project as a <b>.spells</b> file to your computer — open it again anytime with "Open Project File".</p>
   </div>
   <div class="home-grid">
-    <div class="feature"><h3>🎮 5 game genres</h3><p>Platformer, Top-down Adventure (4 modes!), Endless Runner, Balloon Defender, Falling Objects, and Sandbox. Each genre has its own tools and rules — the Top-down Adventure also lets you pick from Adventure, Maze, Shooter, or Stealth mode per level.</p></div>
+    <div class="feature"><h3>🎮 5 game genres</h3><p>Platformer, Top-down Adventure (4 modes!), Endless Runner, Defender Arena, Falling Objects, and Sandbox. Each genre has its own tools and rules — the Top-down Adventure also lets you pick from Adventure, Maze, Shooter, or Stealth mode per level.</p></div>
     <div class="feature"><h3>🧩 Templates for newbies</h3><p>Start with a playable sample game, edit it, learn how it works, then add your own levels and objects.</p></div>
     <div class="feature"><h3>⬜ Create from scratch</h3><p>Pick the game type first, then build a clean project using the editor tools for that type.</p></div>
     <div class="feature"><h3>🎛 Controls you choose</h3><p>Set the control scheme per level: arrows, WASD, mouse follow, or click-to-move. The player sees the right buttons on mobile automatically.</p></div>
@@ -411,8 +411,8 @@ main{max-width:1440px;padding:24px 20px}.panel,.feature,.genre-card,.path-card,.
         <div class="field"><label>Hero name</label><input type="text" id="proj-hero-name" value="Star" oninput="App.onHeroFields()"></div>
         <div class="field"><label>Hero color</label><input type="color" id="proj-hero-color" value="#3de8ff" oninput="App.onHeroFields()"></div>
         <div class="btn-stack" style="margin-top:6px">
-          <button class="btn small" onclick="App.saveProject()">💾 Save Project Locally</button>
-          <button class="btn small" onclick="App.loadProject()">📂 Load Project</button>
+          <button class="btn small" onclick="App.saveProject()">💾 Save Project (.spells)</button>
+          <button class="btn small" onclick="App.loadProjectFromFile()">📂 Open Project File</button>
           <button class="btn small danger" onclick="App.requestNewProject()">↺ New / change project</button>
         </div>
       </div>
@@ -485,18 +485,17 @@ main{max-width:1440px;padding:24px 20px}.panel,.feature,.genre-card,.path-card,.
 
 <!-- ============ EXPORT ============ -->
 <section class="screen" id="screen-export">
-  <div class="screen-title"><div><h2>Export</h2><p>Export is now treated as a build action from the studio, not a main editing mode.</p></div></div>
+  <div class="screen-title"><div><h2>Export</h2><p>Save your project to edit later, or export as a playable HTML game.</p></div></div>
   <div class="export-grid">
     <div class="exp-card">
-      <div class="icon">📄</div><h3>Export as Single HTML</h3>
-      <p>Download a self-contained HTML file with your full game: title screen, all levels, hero, game over and victory screens. Open it anywhere — it just plays.</p>
-      <button class="btn primary" onclick="App.exportHTML()">Download HTML</button>
+      <div class="icon">💾</div><h3>Save Project File</h3>
+      <p>Download a <b>.spells</b> file to your computer. This is your editable project — open it again anytime using "Open Project File" on the home screen. Always save before closing the tab!</p>
+      <button class="btn cyan" onclick="App.saveProject()">Download .spells file</button>
     </div>
     <div class="exp-card">
-      <div class="icon">🕹️</div><h3>Export for itch.io (ZIP)</h3>
-      <p>Package your game as an itch.io-ready ZIP upload.</p>
-      <span class="soon">Coming soon in next version.</span>
-      <button class="btn" disabled>Export ZIP</button>
+      <div class="icon">📄</div><h3>Export as Playable HTML</h3>
+      <p>Download a self-contained HTML file with your full game: title screen, all levels, hero, game over and victory screens. Share it or upload to itch.io — it just plays, no internet needed.</p>
+      <button class="btn primary" onclick="App.exportHTML()">Download HTML game</button>
     </div>
     <div class="exp-card">
       <div class="icon">🌟</div><h3>Publish to SPELLS Arcade</h3>
@@ -519,14 +518,14 @@ main{max-width:1440px;padding:24px 20px}.panel,.feature,.genre-card,.path-card,.
     <div class="tutorial-card"><h3>5. Add assets</h3><p>Use emojis for quick prototypes, or import images. Best format: <b>PNG/WebP/SVG</b>, square, transparent background, around <b>512×512</b>.</p></div>
     <div class="tutorial-card"><h3>6. Define game rules</h3><p>In Sandbox, use <b>Game Logic / Rules</b> to turn the empty canvas into a runner, side platformer, survival game, collect-to-win game, or balloon dodge game.</p></div>
     <div class="tutorial-card"><h3>7. Build landing page</h3><p>Use <b>Game Flow</b> to edit title, tagline, start button, second button, hero display, background style, and high score display.</p></div>
-    <div class="tutorial-card"><h3>8. Test and export</h3><p>Press <b>Test Level</b> or <b>Playtest</b>. Export from the Build Studio when happy. ZIP/Arcade publishing can come later.</p></div>
+    <div class="tutorial-card"><h3>8. Save &amp; export</h3><p>Press <b>💾 Save Project</b> to download a <b>.spells file</b> — this is your editable project. To open it again, use <b>Open Project File</b> on the home screen. When your game is ready, press <b>Export HTML</b> to download the playable game file.</p></div>
   </div>
 </section>
 
 <!-- ============ ABOUT ============ -->
 <section class="screen" id="screen-about">
   <div class="about-box">
-    <h2>About SPELLS v11</h2>
+    <h2>About SPELLS v14</h2>
     <p><b>SPELLS</b> is a no-code browser game creation engine from <b>FROM MANTRAM</b>. It is built for beginners who want to create playable browser and mobile-ready games using templates, sandbox rules, visual editing, game-flow screens and export tools.</p>
     <p>Version 7 focuses on product polish and clarity: the old “level editor” feeling has been replaced with a proper <b>Build Studio</b>, export is treated as a studio action, and landing pages are clearly part of the final game flow.</p>
     <div class="about-list">
@@ -542,13 +541,13 @@ main{max-width:1440px;padding:24px 20px}.panel,.feature,.genre-card,.path-card,.
 
 </main>
 
-<footer><b>SPELLS v11</b> · FROM MANTRAM · Created by Kousik Karthikeyan</footer>
+<footer><b>SPELLS v14</b> · FROM MANTRAM · Created by Kousik Karthikeyan</footer>
 <div class="toast" id="toast"></div>
 
 <script>
 "use strict";
 /* =====================================================================
-   SPELLS v11 — FROM MANTRAM
+   SPELLS v14 — FROM MANTRAM
    Created by Kousik Karthikeyan
    Modules: Genres (rules+templates), runGame (runtime), Characters,
             Editor, SaveManager, ExportManager, App
@@ -811,32 +810,60 @@ const Genres = {
   },
 
   /* ===================== BALLOON DEFENDER ===================== */
-  balloon:{
-    name:'Balloon Defender', icon:'🎈',
-    desc:'Move your balloon with the mouse or your finger. Dodge arrows, grab coins, survive as long as possible!',
-    tags:['Mouse / Touch','Survival','Dodge'],
+  /* ===================== DEFENDER =====================
+     Top-down arena shooter. Mouse to aim, click to fire.
+     Waves of enemies rush the player. Place enemy types,
+     set wave size, choose powers available.             */
+  defender:{
+    name:'Defender', icon:'🛡️',
+    desc:'Top-down arena shooter! Enemies rush at you from all sides — aim with the mouse, click to fire. Survive the waves and rack up points. Place enemies, set their speed, and choose starting powers.',
+    tags:['Shooter','Mouse aim','Waves'],
     tools:[
       {id:'select',label:'Select',ic:'🖱'},
-      {id:'coin',label:'Good pickup',ic:'🪙'},
-      {id:'spike',label:'Bad pickup',ic:'🔴'},
-      {id:'goal',label:'Power-up',ic:'🟢'},
+      {id:'spawn',label:'Player start',ic:'⭐'},
+      {id:'enemy',label:'Enemy type',ic:'👾'},
+      {id:'platform',label:'Cover wall',ic:'🧱'},
+      {id:'coin',label:'Power pickup',ic:'💊'},
       {id:'erase',label:'Erase',ic:'🧹'},
     ],
-    defaults:{coin:{w:24,h:24},spike:{w:34,h:34},goal:{w:34,h:34}},
-    onePerLevel:[],
-    controls:'🖱 Mouse or finger to move the balloon · Dodge incoming arrows · Grab coins for points · Green orbs help · Red orbs are bad — avoid them!',
-    blankLevel(n){ return {name:'Sky '+n, bg:'#73c9ff', backgroundStyle:'skyClouds', pages:1, worldH:460, controls:{scheme:'mouseFollow'}, objects:[
-      {type:'coin',x:180,y:160,w:24,h:24,asset:'🪙',points:10},
-      {type:'goal',x:400,y:200,w:34,h:34,asset:'🟢'},
-      {type:'spike',x:550,y:300,w:34,h:34,asset:'🔴',damage:1},
-    ]}; },
+    defaults:{spawn:{w:34,h:34},enemy:{w:34,h:34},platform:{w:80,h:20},coin:{w:28,h:28}},
+    onePerLevel:['spawn'],
+    controls:'🖱 Mouse to aim · Click to shoot · WASD / Arrows to move · [1] 💣 Grenade · [2] ❄️ Freeze · [3] 🚀 Missile · Survive the wave to win!',
+    blankLevel(n){ return {name:'Arena '+n, bg:'#0d0d1a', backgroundStyle:'stars',
+      defWaveSize:6, defEnemySpeed:1.0, defPowers:{grenade:1,freeze:1,missile:1},
+      objects:[
+        {type:'spawn',x:345,y:210,w:34,h:34},
+        {type:'enemy',x:60,y:60,w:34,h:34,asset:'😡',speed:1.0,hp:1,points:10,behavior:'chase'},
+        {type:'enemy',x:680,y:380,w:34,h:34,asset:'😡',speed:1.0,hp:1,points:10,behavior:'chase'},
+      ]
+    }; },
     templateLevels(){ return [
-      { name:'Sky 1 — Arrow Storm', bg:'#73c9ff', backgroundStyle:'skyClouds', pages:1, worldH:460, controls:{scheme:'mouseFollow'}, objects:[
-        {type:'coin',x:180,y:160,w:24,h:24,asset:'🪙',points:10},
-        {type:'coin',x:360,y:260,w:24,h:24,asset:'🪙',points:10},
-        {type:'goal',x:250,y:110,w:34,h:34,asset:'🟢'},
-        {type:'spike',x:520,y:320,w:34,h:34,asset:'🔴',damage:1},
-      ]},
+      { name:'Arena 1 — First Wave', bg:'#0d0d1a', backgroundStyle:'stars',
+        defWaveSize:6, defEnemySpeed:1.0, defPowers:{grenade:1,freeze:1,missile:1},
+        objects:[
+          {type:'spawn',x:345,y:210,w:34,h:34},
+          {type:'platform',x:200,y:150,w:80,h:20},{type:'platform',x:460,y:280,w:80,h:20},
+          {type:'enemy',x:50,y:50,w:34,h:34,asset:'😡',speed:1.0,hp:1,points:10,behavior:'chase'},
+          {type:'enemy',x:680,y:50,w:34,h:34,asset:'😡',speed:1.0,hp:1,points:10,behavior:'chase'},
+          {type:'enemy',x:50,y:380,w:34,h:34,asset:'😡',speed:1.2,hp:1,points:10,behavior:'chase'},
+          {type:'enemy',x:680,y:380,w:34,h:34,asset:'😡',speed:0.8,hp:2,points:20,behavior:'chase'},
+          {type:'coin',x:340,y:200,w:28,h:28,asset:'💊',points:0},
+        ]
+      },
+      { name:'Arena 2 — Freeze or Die', bg:'#0a0a1f', backgroundStyle:'stars',
+        defWaveSize:10, defEnemySpeed:1.3, defPowers:{grenade:0,freeze:3,missile:1},
+        objects:[
+          {type:'spawn',x:345,y:210,w:34,h:34},
+          {type:'platform',x:150,y:100,w:20,h:120},{type:'platform',x:560,y:240,w:20,h:120},
+          {type:'enemy',x:50,y:50,w:34,h:34,asset:'😤',speed:1.3,hp:1,points:10,behavior:'chase'},
+          {type:'enemy',x:680,y:50,w:34,h:34,asset:'😤',speed:1.3,hp:1,points:10,behavior:'chase'},
+          {type:'enemy',x:360,y:20,w:34,h:34,asset:'😤',speed:1.5,hp:2,points:20,behavior:'chase'},
+          {type:'enemy',x:50,y:380,w:34,h:34,asset:'😤',speed:1.1,hp:1,points:10,behavior:'chase'},
+          {type:'enemy',x:680,y:380,w:34,h:34,asset:'😤',speed:1.1,hp:1,points:10,behavior:'chase'},
+          {type:'coin',x:200,y:220,w:28,h:28,asset:'💊',points:0},
+          {type:'coin',x:500,y:220,w:28,h:28,asset:'💊',points:0},
+        ]
+      },
     ]; }
   },
 
@@ -938,7 +965,38 @@ function runGame(canvas, project, opts) {
   const activeTouches = {};
 
   /* ---------- input ---------- */
+  function canvasPos(t){
+    const r = canvas.getBoundingClientRect();
+    return { x:(t.clientX-r.left)*(W/r.width), y:(t.clientY-r.top)*(H/r.height) };
+  }
+
   function onKey(e, down) {
+    // Defender power keys
+    if(GENRE==='defender' && g && down) {
+      g.defPressedKeys = g.defPressedKeys||{};
+      if(e.key==='1'||e.key==='2'||e.key==='3') { g.defPressedKeys[e.key]=true; e.preventDefault(); }
+    }
+    const map = {ArrowLeft:'left',a:'left',A:'left',ArrowRight:'right',d:'right',D:'right',
+      ArrowUp:'up',w:'up',W:'up',ArrowDown:'down',s:'down',S:'down',' ':'action',z:'action',Z:'action',Enter:'enter'};
+    if (map[e.key] !== undefined) {
+      keys[map[e.key]] = down;
+      if (down && (map[e.key]==='enter' || (map[e.key]==='action' && state!=='playing'))) advance();
+      if (state==='playing' || map[e.key]==='action') e.preventDefault();
+    }
+  }
+  const kd = e=>onKey(e,true), ku = e=>onKey(e,false);
+  document.addEventListener('keydown', kd);
+  document.addEventListener('keyup', ku);
+
+  function pointerDown(e){
+    if (state !== 'playing') {
+      const t = e.touches ? e.touches[0] : e;
+      const p = t ? canvasPos(t) : {x:W/2,y:H/2};
+      if (state==='title' && (S.title.button2Text||'').trim() && p.y>=H*0.68+50 && p.y<=H*0.68+92) {
+        if ((S.title.button2Action||'tutorial')==='tutorial') { titleHelp = !titleHelp; if(e.touches)e.preventDefault(); return; }
+      }
+      advance(); if(e.touches) e.preventDefault(); return;
+    }
     if (e.touches) {
       e.preventDefault();
       for (const t of e.changedTouches) {
@@ -967,7 +1025,8 @@ function runGame(canvas, project, opts) {
     g.pointer.y = p.y + (g.camY||0);
     if (e.touches) e.preventDefault();
   }
-  canvas.addEventListener('mousedown', e=>{ if(g&&g.pointer)g.pointer.down=true; pointerDown(e); pointerMove(e); });
+  canvas.addEventListener('mousedown', e=>{ if(g&&g.pointer){g.pointer.down=true;} pointerDown(e); pointerMove(e); });
+  canvas.addEventListener('mouseup', e=>{ if(g&&g.pointer) g.pointer.down=false; });
   canvas.addEventListener('mousemove', pointerMove);
   canvas.addEventListener('touchstart', e=>{ if(g&&g.pointer)g.pointer.down=true; pointerDown(e); pointerMove(e); g._swipeStart=e.touches[0]?{x:e.touches[0].clientX,y:e.touches[0].clientY}:null; }, {passive:false});
   canvas.addEventListener('touchmove', pointerMove, {passive:false});
@@ -1009,6 +1068,10 @@ function runGame(canvas, project, opts) {
       spikes: L.objects.filter(o=>o.type==='spike'),
       goal: L.objects.find(o=>o.type==='goal'),
       fireT:0, spawnT:1.4, t: 0,
+      // defender
+      defWave:1, defFireT:0, defFreezeT:0, defDoubleTimer:0, defMilestone:0,
+      defPowers: GENRE==='defender' ? Object.assign({grenade:1,freeze:1,missile:1}, (L.defPowers||{})) : {},
+      defExplosions:[], defMissiles:[], defPressedKeys:{},
       // bloom catcher
       catcherBasket: GENRE==='catcher' ? {x:W/2-55, w:110, h:20, y:H-44} : null,
       falling: [], catcherT: undefined,
@@ -1019,6 +1082,7 @@ function runGame(canvas, project, opts) {
     };
   }
   function respawn(){
+    if (GENRE==='catcher') return; // no player to respawn in catcher
     const spawn = g.L.objects.find(o=>o.type==='spawn') || {x:60,y:H-120};
     g.p.x=spawn.x; g.p.y=spawn.y; g.p.vx=0; g.p.vy=0; g.p.inv=1.2;
   }
@@ -1280,33 +1344,107 @@ function runGame(canvas, project, opts) {
     if(logic.win==='survive' && g.t>=num(logic.surviveTime,30)){ state='clear'; stateT=0; }
   }
 
-  function updateBalloon(dt){
-    const p=g.p, step=dt*60; p.w=46; p.h=56;
-    const m=Math.hypot((g.pointer.x-p.x),(g.pointer.y-p.y))||1;
-    if (m>3){ p.x += (g.pointer.x-p.x)/m*5.2*step; p.y += (g.pointer.y-p.y)/m*5.2*step; }
-    p.x=Math.max(0,Math.min(g.worldW-p.w,p.x)); p.y=Math.max(0,Math.min(g.worldH-p.h,p.y));
-    g.arrowT -= dt;
-    if (g.arrowT<=0){
-      g.arrowT = Math.max(.35, 1.2 - score/1000);
-      const side=Math.floor(Math.random()*4); let x,y;
-      if(side===0){x=Math.random()*g.worldW;y=-40;} else if(side===1){x=g.worldW+40;y=Math.random()*g.worldH;} else if(side===2){x=Math.random()*g.worldW;y=g.worldH+40;} else {x=-40;y=Math.random()*g.worldH;}
-      const dx=p.x-x, dy=p.y-y, d=Math.hypot(dx,dy)||1, sp=3.2+Math.min(3,score/700);
-      g.arrows.push({x,y,w:38,h:10,vx:dx/d*sp,vy:dy/d*sp,angle:Math.atan2(dy,dx)});
+  function updateDefender(dt){
+    const L=g.L, p=g.p, step=dt*60;
+    // WASD movement
+    let dx=(keys.right?1:0)-(keys.left?1:0), dy=(keys.down?1:0)-(keys.up?1:0);
+    if(dx||dy){ const m=Math.hypot(dx,dy); p.x+=dx/m*4*step; p.y+=dy/m*4*step; }
+    p.x=Math.max(p.w/2,Math.min(g.worldW-p.w/2,p.x)); p.y=Math.max(p.h/2,Math.min(g.worldH-p.h/2,p.y));
+    // Wall collision (cover)
+    g.plats.forEach(pl=>{
+      if(rectHit({x:p.x-p.w/2,y:p.y-p.h/2,w:p.w,h:p.h},pl)){
+        const ox=Math.min((p.x+p.w/2)-pl.x,pl.x+pl.w-(p.x-p.w/2));
+        const oy=Math.min((p.y+p.h/2)-pl.y,pl.y+pl.h-(p.y-p.h/2));
+        if(ox<oy){ p.x+=(p.x<pl.x+pl.w/2)?-ox:ox; } else { p.y+=(p.y<pl.y+pl.h/2)?-oy:oy; }
+      }
+    });
+    // Auto-fire from click (pointer.down) — fire toward mouse
+    g.defFireT=(g.defFireT||0)-dt;
+    if(g.pointer.down && g.defFireT<=0){
+      g.defFireT=0.22;
+      const ang=Math.atan2(g.pointer.y-p.y, g.pointer.x-p.x);
+      const spd=12;
+      // Double barrel if active
+      if((g.defDoubleTimer||0)>0){
+        const perp=ang+Math.PI/2, off=7;
+        g.bullets.push({x:p.x+Math.cos(perp)*off,y:p.y+Math.sin(perp)*off,vx:Math.cos(ang)*spd,vy:Math.sin(ang)*spd,r:5,double:true});
+        g.bullets.push({x:p.x-Math.cos(perp)*off,y:p.y-Math.sin(perp)*off,vx:Math.cos(ang)*spd,vy:Math.sin(ang)*spd,r:5,double:true});
+      } else {
+        g.bullets.push({x:p.x,y:p.y,vx:Math.cos(ang)*spd,vy:Math.sin(ang)*spd,r:5});
+      }
     }
-    // dt-normalized movement; missed arrows removed silently (no score for missing — that was backwards)
-    for(let i=g.arrows.length-1;i>=0;i--){
-      const a=g.arrows[i]; a.x+=a.vx*step; a.y+=a.vy*step;
-      if(rectHit(p,{x:a.x-8,y:a.y-5,w:32,h:12})){ g.arrows.splice(i,1); hurt(1); continue; }
-      if(a.x<-80||a.x>g.worldW+80||a.y<-80||a.y>g.worldH+80){ g.arrows.splice(i,1); }
+    // Special power keys (grenade=1, freeze=2, missile=3)
+    if(g.defPressedKeys) {
+      if(g.defPressedKeys['1'] && (g.defPowers.grenade||0)>0){ g.defPowers.grenade--; g.defFreezeT=0;
+        g.enemies.forEach(e=>{ if(!e.dead){e.dead=true;score+=num(e.points,10);g.defExplosions.push({x:e.x,y:e.y,r:10,maxR:50,op:1});} }); g.defPressedKeys['1']=false; }
+      if(g.defPressedKeys['2'] && (g.defPowers.freeze||0)>0){ g.defPowers.freeze--; g.defFreezeT=240; g.defPressedKeys['2']=false; }
+      if(g.defPressedKeys['3'] && (g.defPowers.missile||0)>0){ g.defPowers.missile--;
+        const ang=Math.atan2(g.pointer.y-p.y,g.pointer.x-p.x);
+        g.defMissiles.push({x:p.x,y:p.y,vx:Math.cos(ang)*14,vy:Math.sin(ang)*14,tx:g.pointer.x,ty:g.pointer.y,r:14}); g.defPressedKeys['3']=false; }
     }
-    g.coins.forEach(c=>{ if(!c.got&&rectHit(p,c)){ c.got=true; score+=num(c.points,10); } });
-    g.spikes.forEach(s=>{ if(!s.got&&rectHit(p,s)){ s.got=true; g.arrowT=.05; score+=20; } });
-    g.enemies.forEach(e=>{ if(!e.dead&&rectHit(p,e)){ e.dead=true; score+=num(e.points,10); } });
-    // Goal: one-time bonus pickup — was +2 every frame = 120pts/sec exploit
-    if (g.goal && !g.goal.got && rectHit(p,g.goal)){ g.goal.got=true; score+=num(g.goal.points,30); }
+    if((g.defFreezeT||0)>0) g.defFreezeT--;
+    if((g.defDoubleTimer||0)>0) g.defDoubleTimer--;
+    // Move bullets
+    for(let i=g.bullets.length-1;i>=0;i--){
+      const b=g.bullets[i]; b.x+=b.vx*step; b.y+=b.vy*step;
+      if(b.x<-20||b.x>g.worldW+20||b.y<-20||b.y>g.worldH+20){g.bullets.splice(i,1);continue;}
+      let hit=false;
+      for(let j=g.enemies.length-1;j>=0;j--){
+        const e=g.enemies[j]; if(e.dead) continue;
+        if(Math.hypot(b.x-e.x,b.y-e.y)<b.r+e.w/2){ e.hp--; if(e.hp<=0){e.dead=true;score+=num(e.points,10);g.defExplosions.push({x:e.x,y:e.y,r:8,maxR:36,op:1});} hit=true; break; }
+      }
+      if(hit){g.bullets.splice(i,1);}
+    }
+    // Move missiles
+    for(let i=(g.defMissiles||[]).length-1;i>=0;i--){
+      const m=g.defMissiles[i]; m.x+=m.vx*step; m.y+=m.vy*step;
+      let boom=Math.hypot(m.x-m.tx,m.y-m.ty)<20;
+      if(!boom) for(let j=g.enemies.length-1;j>=0;j--){ if(!g.enemies[j].dead&&Math.hypot(m.x-g.enemies[j].x,m.y-g.enemies[j].y)<m.r+g.enemies[j].w/2){boom=true;break;} }
+      if(boom||m.x<-100||m.x>g.worldW+100||m.y<-100||m.y>g.worldH+100){
+        g.defExplosions.push({x:m.x,y:m.y,r:15,maxR:140,op:1});
+        for(let j=g.enemies.length-1;j>=0;j--){ if(!g.enemies[j].dead&&Math.hypot(m.x-g.enemies[j].x,m.y-g.enemies[j].y)<140){g.enemies[j].dead=true;score+=num(g.enemies[j].points,10);} }
+        g.defMissiles.splice(i,1);
+      }
+    }
+    // Update explosions
+    for(let i=(g.defExplosions||[]).length-1;i>=0;i--){
+      const ex=g.defExplosions[i]; ex.r+=3; ex.op-=0.06; if(ex.op<=0) g.defExplosions.splice(i,1);
+    }
+    // Move enemies toward player
+    const frozen=(g.defFreezeT||0)>0;
+    g.enemies.forEach(e=>{
+      if(e.dead) return;
+      if(!frozen){ const m=Math.hypot(p.x-e.x,p.y-e.y)||1; e.x+=(p.x-e.x)/m*num(e.speed,1)*step; e.y+=(p.y-e.y)/m*num(e.speed,1)*step; }
+      if(p.inv<=0 && Math.hypot(p.x-e.x,p.y-e.y)<p.w/2+e.w/2){ hurt(1); }
+    });
+    // Spawn new wave enemies if all dead
+    if(g.enemies.every(e=>e.dead)){
+      g.defWave=(g.defWave||1)+1;
+      const waveSize=num(L.defWaveSize,6)+Math.floor(g.defWave*1.5);
+      const spd=num(L.defEnemySpeed,1.0)+g.defWave*0.08;
+      const emojis=['😡','😤','👺','💀','👾','🤖'];
+      for(let i=0;i<waveSize;i++){
+        const side=Math.floor(Math.random()*4); let ex,ey;
+        if(side===0){ex=Math.random()*W;ey=-40;} else if(side===1){ex=W+40;ey=Math.random()*H;} else if(side===2){ex=Math.random()*W;ey=H+40;} else{ex=-40;ey=Math.random()*H;}
+        const hp=Math.max(1,Math.floor(g.defWave/3));
+        g.enemies.push({x:ex,y:ey,w:34,h:34,sx:ex,sy:ey,dir:1,dirY:1,dead:false,hp,maxHp:hp,vy:0,speed:spd+Math.random()*0.3,points:10*hp,behavior:'chase',asset:emojis[i%emojis.length]});
+      }
+      // Award double barrel every 2 waves
+      if(g.defWave%2===0) g.defDoubleTimer=(g.defDoubleTimer||0)+900;
+    }
+    // Score milestone powers (every 200 pts)
+    const milestone=Math.floor(score/200);
+    if(milestone>(g.defMilestone||0)){
+      const earn=milestone-(g.defMilestone||0); g.defMilestone=milestone;
+      for(let i=0;i<earn;i++){ const r=Math.floor(Math.random()*3); if(r===0)g.defPowers.grenade++;else if(r===1)g.defPowers.freeze++;else g.defPowers.missile++; }
+    }
+    // Pickup coins (power pills) — currently cosmetic but could restore power
+    g.coins.forEach(c=>{ if(!c.got&&Math.hypot(p.x-c.x,p.y-c.y)<p.w/2+14){ c.got=true; g.defPowers.missile++; } });
+    // Win: survive 10 waves
+    if((g.defWave||1)>10){ state='clear'; stateT=0; }
   }
 
-  const UPDATERS = { platformer:updatePlatformer, topdown:updateTopdown, runner:updateRunner, sandbox:updateSandbox, balloon:updateBalloon, catcher:updateCatcher };
+  const UPDATERS = { platformer:updatePlatformer, topdown:updateTopdown, runner:updateRunner, sandbox:updateSandbox, defender:updateDefender, catcher:updateCatcher };
 
   /* ---- Falling Objects (Catcher) ---- */
   function updateCatcher(dt){
@@ -1370,8 +1508,7 @@ function runGame(canvas, project, opts) {
 
   function update(dt){
     g.t += dt;
-    const p=g.p;
-    if (p.inv>0) p.inv -= dt;
+    if (GENRE!=='catcher') { const p=g.p; if (p.inv>0) p.inv -= dt; }
     (UPDATERS[GENRE]||updatePlatformer)(dt);
   }
 
@@ -1430,7 +1567,7 @@ function runGame(canvas, project, opts) {
       if(help.length>90) centerText(help.slice(90,170), H*0.12+76, 12, 'rgba(255,255,255,.82)', 'normal');
     }
     centerText(touchDevice?'Tap to start':'Click or press Space', H*0.68+104, 12, 'rgba(255,255,255,.55)', 'normal');
-    centerText('Made with SPELLS v11 · FROM MANTRAM', H-12, 10, 'rgba(255,255,255,.4)', 'normal');
+    centerText('Made with SPELLS v14 · FROM MANTRAM', H-12, 10, 'rgba(255,255,255,.4)', 'normal');
   }
   function drawEndScreen(cfg, showScore, isWin){
     ctx.fillStyle=cfg.bg; ctx.fillRect(0,0,W,H);
@@ -1513,6 +1650,70 @@ function runGame(canvas, project, opts) {
   }
   function drawGame(){
     const L=g.L;
+
+    // ---- Defender special draw ----
+    if (GENRE==='defender') {
+      drawSceneBackground(L.backgroundStyle||'stars', L.bg||'#0d0d1a', L.bg||'#0d0d1a');
+      const p=g.p;
+      // Draw cover walls
+      g.plats.forEach(pl=>{ ctx.fillStyle='#3a4a6a'; ctx.beginPath(); ctx.roundRect(pl.x,pl.y,pl.w,pl.h,4); ctx.fill(); });
+      // Draw missiles
+      (g.defMissiles||[]).forEach(m=>{ ctx.font='28px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('🚀',m.x,m.y); ctx.textBaseline='alphabetic'; ctx.textAlign='left'; });
+      // Draw explosions
+      (g.defExplosions||[]).forEach(ex=>{
+        ctx.beginPath(); ctx.arc(ex.x,ex.y,ex.r,0,7); ctx.fillStyle=`rgba(255,140,0,${ex.op})`; ctx.fill();
+        ctx.beginPath(); ctx.arc(ex.x,ex.y,ex.r*0.5,0,7); ctx.fillStyle=`rgba(255,240,80,${ex.op})`; ctx.fill();
+      });
+      // Draw bullets
+      const dbl=(g.defDoubleTimer||0)>0;
+      g.bullets.forEach(b=>{ ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,7); ctx.fillStyle=dbl?'#00ffcc':'#ffea00'; ctx.fill(); });
+      // Draw enemies (emoji + HP bar)
+      const frozen=(g.defFreezeT||0)>0;
+      g.enemies.forEach(e=>{
+        if(e.dead) return;
+        ctx.save(); if(frozen){ctx.shadowBlur=12;ctx.shadowColor='cyan';}
+        ctx.font='32px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillText(frozen?'🥶':(e.asset||'😡'), e.x, e.y); ctx.restore();
+        if(e.maxHp>1){ ctx.fillStyle='#333'; ctx.fillRect(e.x-16,e.y-22,32,4); ctx.fillStyle='#4ade80'; ctx.fillRect(e.x-16,e.y-22,32*(e.hp/e.maxHp),4); }
+      });
+      // Draw player
+      const ang=Math.atan2(g.pointer.y-p.y, g.pointer.x-p.x);
+      if(p.inv<=0||Math.floor(g.t*10)%2===0) {
+        if(dbl){
+          // Double barrel indicator above head
+          ctx.fillStyle='#00ffcc'; ctx.font='bold 13px sans-serif'; ctx.textAlign='center';
+          ctx.fillText('🔥 DUAL: '+((g.defDoubleTimer/60).toFixed(1))+'s', p.x, p.y-30);
+        }
+        ctx.save(); ctx.translate(p.x,p.y);
+        ctx.fillStyle='dodgerblue'; ctx.beginPath(); ctx.arc(0,0,17,0,7); ctx.fill();
+        ctx.rotate(ang);
+        if(dbl){ ctx.fillStyle='#00ffcc'; ctx.fillRect(0,-9,28,5); ctx.fillRect(0,4,28,5); }
+        else { ctx.fillStyle='white'; ctx.fillRect(0,-3,26,7); }
+        ctx.restore();
+      }
+      // Freeze overlay
+      if(frozen){ ctx.strokeStyle='rgba(0,188,212,.35)'; ctx.lineWidth=28; ctx.strokeRect(0,0,W,H); ctx.fillStyle='rgba(0,188,212,.04)'; ctx.fillRect(0,0,W,H); }
+      // HUD
+      ctx.fillStyle='rgba(0,0,0,.55)'; ctx.beginPath(); ctx.roundRect(8,8,W-16,36,9); ctx.fill();
+      ctx.fillStyle='#ffb347'; ctx.font='bold 13px sans-serif';
+      ctx.fillText('★ '+score, 16, 30);
+      ctx.fillStyle='#ff5470'; ctx.fillText('♥ '+lives, 100, 30);
+      ctx.fillStyle='rgba(255,255,255,.8)'; ctx.font='12px sans-serif';
+      ctx.fillText('Wave '+(g.defWave||1)+' / 10', 170, 30);
+      ctx.fillStyle='#4ade80';
+      ctx.fillText('[1] 💣 '+((g.defPowers&&g.defPowers.grenade)||0)+'  [2] ❄️ '+((g.defPowers&&g.defPowers.freeze)||0)+'  [3] 🚀 '+((g.defPowers&&g.defPowers.missile)||0), 280, 30);
+      if(dbl) { ctx.fillStyle='#00ffcc'; ctx.fillText('DUAL BARREL ACTIVE', W-180, 30); }
+      // Touch buttons
+      touchBtns.length=0;
+      if(touchDevice){
+        const bw=52,m=10,by=H-bw-m;
+        touchBtns.push({key:'left',label:'◀',x:m,y:by,w:bw,h:bw},{key:'right',label:'▶',x:m+bw+8,y:by,w:bw,h:bw},
+          {key:'up',label:'▲',x:m+bw/2+4,y:by-bw-8,w:bw,h:bw},{key:'down',label:'▼',x:m+bw/2+4,y:by,w:bw,h:bw},
+          {key:'action',label:'🔥',x:W-bw-m,y:by,w:bw,h:bw});
+        touchBtns.forEach(d=>{ ctx.fillStyle=keys[d.key]?'rgba(255,179,71,.65)':'rgba(255,255,255,.14)'; ctx.beginPath(); ctx.roundRect(d.x,d.y,d.w,d.h,12); ctx.fill(); ctx.fillStyle='#fff'; ctx.font='bold 20px sans-serif'; ctx.textAlign='center'; ctx.fillText(d.label,d.x+d.w/2,d.y+d.h/2+7); ctx.textAlign='left'; });
+      }
+      return;
+    }
 
     // ---- Bloom Catcher special draw ----
     if (GENRE==='catcher') {
@@ -1599,10 +1800,8 @@ function runGame(canvas, project, opts) {
       g.enemies.forEach(drawEnemy);
       drawGoal(g.goal);
       if (GENRE==='topdown' && g.L.tdMode==='shooter') g.bullets.forEach(b=>{ ctx.fillStyle='#ffb347'; ctx.beginPath(); ctx.arc(b.x,b.y,5,0,7); ctx.fill(); });
-      if (GENRE==='balloon') g.arrows.forEach(a=>{ ctx.save(); ctx.translate(a.x,a.y); ctx.rotate(a.angle); ctx.fillStyle='#ffd454'; ctx.fillRect(-22,-4,44,8); ctx.fillStyle='#ff5470'; ctx.beginPath(); ctx.moveTo(24,0); ctx.lineTo(8,-12); ctx.lineTo(8,12); ctx.closePath(); ctx.fill(); ctx.restore(); });
       if (p.inv<=0 || Math.floor(g.t*10)%2===0) {
-        if (GENRE==='balloon') { ctx.font='46px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('🎈', p.x+p.w/2, p.y+p.h/2); }
-        else drawHero(ctx, p.x, p.y, p.w, p.h, CH.id, CH.color, g.t, p.facing);
+        drawHero(ctx, p.x, p.y, p.w, p.h, CH.id, CH.color, g.t, p.facing);
       }
       if (GENRE==='topdown' && g.L.tdMode==='shooter'){
         ctx.strokeStyle='#fff'; ctx.lineWidth=3; ctx.beginPath();
@@ -1650,9 +1849,9 @@ function runGame(canvas, project, opts) {
   /* ---------- main loop ---------- */
   function loop(ts){
     const dt=Math.min((ts-last)/1000,0.05)||0.016; last=ts; stateT+=dt;
-    if (state==='playing'){ update(dt); if (state==='playing'||state==='clear') drawGame(); }
+    if (state==='playing' && g){ update(dt); if (state==='playing'||state==='clear') drawGame(); }
     if (state==='title') drawTitle();
-    else if (state==='clear'){ drawGame(); drawLevelClear(); }
+    else if (state==='clear' && g){ drawGame(); drawLevelClear(); }
     else if (state==='over'){ updateBest(); drawEndScreen(S.gameover, true, false); }
     else if (state==='win'){ updateBest(); drawEndScreen(S.win, S.win.showScore==='yes', true); }
     raf=requestAnimationFrame(loop);
@@ -1678,7 +1877,7 @@ function newProject(genreId, fromTemplate){
   const levels = fromTemplate ? G.templateLevels() : [G.blankLevel(1)];
   return {
     appName:'SPELLS',
-    engineVersion:'v11',
+    engineVersion:'v14',
     projectId: 'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,8),
     startMode: fromTemplate ? 'template' : 'scratch',
     genre: genreId,
@@ -1697,9 +1896,22 @@ function newProject(genreId, fromTemplate){
 
 /* ========================= SAVE MANAGER ============================ */
 const SaveManager = {
-  KEY:'spells_project_v11', OLD_KEY:'spells_project_v8', OLD4_KEY:'spells_project_v7', OLD3_KEY:'spells_project_v5', OLD2_KEY:'spells_project_v4', LEGACY_KEY:'superstar_project_v3',
-  save(p){ try{ localStorage.setItem(this.KEY, JSON.stringify(p)); return true; }catch(e){ return false; } },
-  load(){ try{ const r=localStorage.getItem(this.KEY) || localStorage.getItem(this.OLD_KEY) || localStorage.getItem(this.OLD4_KEY) || localStorage.getItem(this.OLD3_KEY) || localStorage.getItem(this.OLD2_KEY) || localStorage.getItem(this.LEGACY_KEY); return r?JSON.parse(r):null; }catch(e){ return null; } }
+  KEY:'spells_project_v14',
+  /* Auto-save to localStorage (backup only) */
+  autosave(p){ try{ localStorage.setItem(this.KEY, JSON.stringify(p)); }catch(e){} },
+  /* Download project as .spells JSON file */
+  downloadJSON(p){
+    const blob = new Blob([JSON.stringify(p, null, 2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (p.title||'my-game').toLowerCase().replace(/[^a-z0-9]+/g,'-') + '.spells';
+    a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+  },
+  /* Load from localStorage autosave (only used on init) */
+  loadAutosave(){ try{ const r=localStorage.getItem(this.KEY); return r?JSON.parse(r):null; }catch(e){ return null; } },
+  /* Parse an imported JSON file */
+  parseFile(text){ try{ return JSON.parse(text); }catch(e){ return null; } }
 };
 
 /* ======================== EXPORT MANAGER =========================== */
@@ -1709,7 +1921,7 @@ const ExportManager = {
     return `<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>${esc(project.title)} — Made with SPELLS v11</title>
+<title>${esc(project.title)} — Made with SPELLS v14</title>
 <style>
 body{margin:0;background:#0a0e1a;color:#f0f3ff;font-family:system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:12px;box-sizing:border-box}
 canvas{background:#000;border-radius:10px;max-width:100%;touch-action:none;box-shadow:0 0 0 1px #2a3458,0 10px 40px rgba(0,0,0,.5)}
@@ -1717,7 +1929,7 @@ footer{margin-top:auto;padding-top:14px;font-size:11.5px;color:#8b94b8;text-alig
 footer b{color:#ffb347}
 
 
-/* ===== SPELLS v11 PROFESSIONAL UI REVAMP ===== */
+/* ===== SPELLS v14 PROFESSIONAL UI REVAMP ===== */
 :root{
   --app-bg:#070a12; --surface:#0f1424; --surface2:#151b2e; --glass:rgba(15,20,36,.78);
   --line:rgba(159,176,255,.16); --line2:rgba(255,255,255,.08); --accent:#ffb24a; --accent2:#ff7a1a;
@@ -1751,7 +1963,7 @@ main{max-width:1440px;padding:24px 20px}.panel,.feature,.genre-card,.path-card,.
 
 </style></head><body>
 <canvas id="c" width="760" height="460"></canvas>
-<footer>Made with <b>SPELLS v11</b><br>FROM MANTRAM</footer>
+<footer>Made with <b>SPELLS v14</b><br>FROM MANTRAM</footer>
 <script>
 "use strict";
 const drawHero = ${drawHero.toString()};
@@ -1850,6 +2062,31 @@ const Editor = {
 
   onDown(e){
     const p=this.pos(e);
+    // Catcher: clicking selects items from the preview panel
+    if (App.project.genre==='catcher') {
+      if (this.tool==='erase') {
+        const L=this.level();
+        const hit=L.objects.find(o=>o._edX!==undefined && p.x>=o._edX&&p.x<=o._edX+o._edW&&p.y>=o._edY&&p.y<=o._edY+o._edH);
+        if(hit){ L.objects.splice(L.objects.indexOf(hit),1); if(this.selected===hit) this.selected=null; App.renderInspector(); this.draw(); App.toast('Item removed'); }
+        return;
+      }
+      if (this.tool==='select') {
+        const L=this.level();
+        const hit=L.objects.find(o=>o._edX!==undefined && p.x>=o._edX&&p.x<=o._edX+o._edW&&p.y>=o._edY&&p.y<=o._edY+o._edH);
+        this.selected=hit||null; App.renderInspector(); this.draw(); return;
+      }
+      // Place a new item into the pool (x/y don't matter for catcher)
+      const G=this.genre(), d=G.defaults[this.tool]; if(!d) return;
+      const obj={type:this.tool, x:0, y:0, w:d.w||36, h:d.h||36,
+        asset: this.tool==='coin'?'🌸':'💣',
+        points: this.tool==='coin'?10:0,
+        damage: this.tool==='spike'?1:0,
+      };
+      this.level().objects.push(obj);
+      this.selected=obj; App.renderInspector(); App.markDirty();
+      App.toast(this.tool==='coin'?'Good item added — set its emoji in inspector':'Bad item added — set its emoji in inspector');
+      this.draw(); return;
+    }
     if (this.tool==='select'){
       const o=this.hitObject(p);
       this.selected=o;
@@ -1878,19 +2115,19 @@ const Editor = {
   },
   applyDefaults(obj){
     const genre = App.project.genre;
+    const tdMode = (App.project.levels[this.levelIdx]||{}).tdMode||'adventure';
     if (obj.type==='enemy'){
-      obj.behavior = genre==='shooter' ? 'chase' : 'patrolX';
+      obj.behavior = tdMode==='shooter' ? 'chase' : 'patrolX';
       obj.dir = 1; obj.dirY = 1;
-      obj.speed = genre==='shooter' ? 1.3 : 1.2;
-      obj.rangeX = genre==='topdown' ? 60 : 70;
-      obj.rangeY = 60;
-      obj.hp = genre==='shooter' ? 3 : 1;
-      obj.damage = 1;
+      obj.speed = tdMode==='shooter' ? 1.3 : (tdMode==='stealth' ? 0.8 : 1.2);
+      obj.rangeX = 70; obj.rangeY = 60;
+      obj.hp = tdMode==='shooter' ? 3 : (tdMode==='stealth' ? 99 : 1);
+      obj.damage = 1; obj.points = 20;
       obj.physics = genre==='platformer' ? 'ground' : 'float';
-      obj.points = 20;
+      if (tdMode==='stealth') obj.asset='💂';
     }
     if (obj.type==='spike'){ obj.damage = 1; }
-    if (obj.type==='coin'){ obj.points = genre==='maze' ? 25 : 10; }
+    if (obj.type==='coin'){ obj.points = 10; }
     if (obj.type==='platform'){ obj.solid = 'yes'; obj.rotation = 0; }
   },
   onMove(e){
@@ -1930,6 +2167,49 @@ const Editor = {
     L.pages = Math.max(1, Number(L.pages||Math.ceil((L.worldW||W)/W)||1));
     L.worldW = W * L.pages; L.worldH = Math.max(H, Number(L.worldH||H));
     if (this.page >= L.pages) this.page = L.pages-1;
+
+    // ---- Catcher: show a preview instead of blank grid ----
+    if (App.project.genre==='catcher') {
+      // Background
+      c.fillStyle=L.bg||'#1a2e1a'; c.fillRect(0,0,W,H);
+      if ((L.backgroundStyle||'skyClouds')==='skyClouds') {
+        c.fillStyle='rgba(255,255,255,.6)';
+        for(let i=0;i<5;i++){ const cx=(i*160+60)%W, cy=60+(i*70)%120, sc=.7+(i%3)*.2;
+          c.beginPath(); c.arc(cx,cy,22*sc,0,7); c.arc(cx+26*sc,cy-7*sc,28*sc,0,7); c.arc(cx+56*sc,cy,22*sc,0,7); c.arc(cx+28*sc,cy+10*sc,26*sc,0,7); c.fill(); }
+      }
+      // Show item pool across the top
+      const pool=[...L.objects.filter(o=>o.type==='coin'),...L.objects.filter(o=>o.type==='spike')];
+      c.font='bold 13px sans-serif'; c.fillStyle='rgba(255,255,255,.55)'; c.textAlign='center';
+      c.fillText('ITEMS THAT WILL FALL', W/2, 36);
+      pool.forEach((item,i)=>{
+        const ix = 80 + i*80, iy=80;
+        c.font='30px sans-serif'; c.textAlign='center'; c.textBaseline='middle';
+        c.fillText(item.asset||(item.type==='coin'?'🌸':'💣'), ix, iy);
+        c.font='11px sans-serif'; c.textBaseline='alphabetic';
+        c.fillStyle=item.type==='coin'?'#4ade80':'#ff5470';
+        c.fillText(item.type==='coin'?'+'+item.points:'−HP', ix, iy+26);
+        // selection highlight
+        if (this.selected===item) { c.strokeStyle='#ffb347'; c.lineWidth=2; c.setLineDash([4,3]); c.strokeRect(ix-22,iy-22,44,44); c.setLineDash([]); }
+        // store clickable area for selection
+        item._edX=ix-22; item._edY=iy-22; item._edW=44; item._edH=44;
+      });
+      c.textAlign='left'; c.textBaseline='alphabetic';
+      // Show catcher at bottom
+      const catcherAsset=L.catcherAsset||'🧺';
+      const bx=W/2-55, by=H-60, bw=110, bh=24;
+      c.font='40px sans-serif'; c.textAlign='center'; c.textBaseline='middle';
+      c.fillText(catcherAsset, W/2, by+bh/2); c.textAlign='left'; c.textBaseline='alphabetic';
+      // Info panel at bottom
+      c.fillStyle='rgba(0,0,0,.45)'; c.beginPath(); c.roundRect(12,H-38,W-24,28,8); c.fill();
+      c.fillStyle='rgba(255,255,255,.7)'; c.font='12px sans-serif';
+      c.fillText(`Fall speed: ${L.fallSpeed||2.5}  |  Spawn rate: every ${L.spawnRate||1.2}s  |  Timer: ${L.gameTime||60}s  |  Catcher: ${catcherAsset}`, 20, H-20);
+      // Hint
+      c.fillStyle='rgba(255,255,255,.35)'; c.font='12px sans-serif'; c.textAlign='center';
+      c.fillText('Add good/bad items using the tools above — set their emoji in the inspector ✦ Adjust speed & timer in Level Settings', W/2, H/2+20);
+      c.textAlign='left';
+      return;
+    }
+
     this.drawEditorBackground(c,L,W,H);
     c.strokeStyle='rgba(255,255,255,.05)'; c.lineWidth=1;
     for(let x=0;x<=W;x+=this.GRID*2){ c.beginPath(); c.moveTo(x,0); c.lineTo(x,H); c.stroke(); }
@@ -1945,13 +2225,12 @@ const Editor = {
     c.restore();
   },
   drawObj(c,o,L,G){
-    const isTop = (App.project.genre==='topdown'||App.project.genre==='maze'||App.project.genre==='sandbox'||App.project.genre==='balloon');
+    const isTop = (App.project.genre==='topdown'||App.project.genre==='sandbox'||App.project.genre==='catcher');
     const drawAsset=()=>{ if(!o.asset) return false; if(String(o.asset).startsWith('data:image')){ let img=AssetImageCache[o.asset]; if(!img){ img=new Image(); img.src=o.asset; AssetImageCache[o.asset]=img; } if(img.complete){ c.drawImage(img,o.x,o.y,o.w,o.h); return true; } return false; } c.font=Math.max(18,Math.min(o.w,o.h))+'px sans-serif'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(o.asset,o.x+o.w/2,o.y+o.h/2); c.textAlign='left'; c.textBaseline='alphabetic'; return true; };
     if (o.type!=='platform' && drawAsset()) return;
     if (o.type==='platform'){
       const n=parseInt(L.bg.slice(1),16);
       const sh=v=>Math.min(255,((n>>v)&255)+60);
-      // rotation handled by w/h swap in rotateSelected — no canvas transform needed
       c.fillStyle='rgb('+sh(16)+','+sh(8)+','+sh(0)+')';
       c.beginPath(); c.roundRect(o.x,o.y,o.w,o.h,5); c.fill();
       c.fillStyle='rgba(255,255,255,.18)'; c.fillRect(o.x+2,o.y+2,Math.max(0,o.w-4),3); c.restore();
@@ -1964,8 +2243,7 @@ const Editor = {
         for(let i=0;i<n;i++){ const sx=o.x+i*(o.w/n);
           c.beginPath(); c.moveTo(sx,o.y+o.h); c.lineTo(sx+o.w/n/2,o.y); c.lineTo(sx+o.w/n,o.y+o.h); c.fill(); } }
     } else if (o.type==='coin'){
-      const isKey = App.project.genre==='maze';
-      c.fillStyle = isKey ? '#3de8ff' : '#ffd700';
+      c.fillStyle='#ffd700';
       c.beginPath(); c.arc(o.x+12,o.y+12,10,0,7); c.fill();
       c.fillStyle='rgba(255,255,255,.6)'; c.beginPath(); c.arc(o.x+9,o.y+9,3,0,7); c.fill();
     } else if (o.type==='enemy'){
@@ -1981,7 +2259,7 @@ const Editor = {
       const arrow = behavior==='chase'?'↯': behavior==='static'?'•': behavior==='patrolY'?'↕':'↔';
       c.fillText(arrow, o.x+o.w/2, o.y-5); c.textAlign='left';
     } else if (o.type==='goal'){
-      if (isTop || App.project.genre==='shooter'){
+      if (isTop || App.project.genre==='topdown'){
         c.fillStyle='#4ade80'; c.beginPath(); c.roundRect(o.x,o.y,o.w,o.h,6); c.fill();
         c.fillStyle='rgba(0,0,0,.35)'; c.font='bold 16px sans-serif'; c.textAlign='center';
         c.fillText('🚩', o.x+o.w/2, o.y+o.h/2+6); c.textAlign='left';
@@ -2037,14 +2315,16 @@ const App = {
     if(!this.project) return;
     this.dirty=true;
     this.updateProjectStatus();
+    // Silent autosave to localStorage as backup (not the primary save)
+    SaveManager.autosave(this.project);
   },
 
   canLeaveStudio(tab){
     const leavingHud = ['home','tutorial','about','new'].includes(tab);
     if(this.currentTab==='editor' && leavingHud && this.dirty){
-      const choice = confirm('You have unsaved progress in Build Studio. Save before leaving?\n\nOK = Save and continue\nCancel = Stay in Build Studio');
+      const choice = confirm('You have unsaved changes in Build Studio. Save your project file before leaving?\n\nOK = Save file and leave\nCancel = Stay in Build Studio');
       if(!choice) return false;
-      this.saveProject(true);
+      this.saveProject();
     }
     return true;
   },
@@ -2059,7 +2339,8 @@ const App = {
     if (this.charAnimRaf && tab!=='character'){ cancelAnimationFrame(this.charAnimRaf); this.charAnimRaf=null; }
     if (tab==='editor') Editor.draw();
     if (tab==='screens') this.drawScreenPreviews();
-    if (tab==='play') this.startFullGame();
+    if (tab==='play' && !this._skipAutoPlay) this.startFullGame();
+    this._skipAutoPlay = false;
     if (tab==='character') this.animateCharPreview();
     this.currentTab=tab;
     this.updateProjectStatus();
@@ -2131,6 +2412,7 @@ const App = {
     document.getElementById('ed-genre-badge').textContent = Genres[this.selectedGenre].icon+' '+Genres[this.selectedGenre].name;
     document.getElementById('ed-mode-badge').textContent = mode==='template' ? '🧩 Template start' : '⬜ Scratch start';
     this.dirty=true; this.updateProjectStatus();
+    SaveManager.autosave(this.project);
     this.go('editor');
     this.toast((mode==='template'?'Template loaded — ':'Blank canvas — ')+Genres[this.selectedGenre].name+' is now your active project');
   },
@@ -2269,6 +2551,28 @@ const App = {
       const fs=document.getElementById('lvl-fall-speed'); if(fs) fs.value=L.fallSpeed;
       const sr=document.getElementById('lvl-spawn-rate'); if(sr) sr.value=L.spawnRate;
       const gt=document.getElementById('lvl-game-time'); if(gt) gt.value=L.gameTime;
+    } else if (this.project.genre==='defender') {
+      extra.innerHTML=`
+      <div class="mini-badge">Defender Arena Settings</div>
+      <div class="row2">
+        <div class="field"><label>Starting wave size</label>
+          <input type="number" id="lvl-def-wave" value="6" min="2" max="30" oninput="App.onLevelField()"></div>
+        <div class="field"><label>Enemy speed (1=normal)</label>
+          <input type="number" id="lvl-def-speed" value="1.0" min="0.3" max="5" step="0.1" oninput="App.onLevelField()"></div>
+      </div>
+      <div class="mini-badge" style="margin-top:8px">Starting Powers</div>
+      <div class="row2">
+        <div class="field"><label>💣 Grenades</label><input type="number" id="lvl-def-grenade" value="1" min="0" max="9" oninput="App.onLevelField()"></div>
+        <div class="field"><label>❄️ Freezes</label><input type="number" id="lvl-def-freeze" value="1" min="0" max="9" oninput="App.onLevelField()"></div>
+      </div>
+      <div class="field"><label>🚀 Missiles</label><input type="number" id="lvl-def-missile" value="1" min="0" max="9" oninput="App.onLevelField()"></div>
+      <p class="hint">Place <b>Enemy</b> objects to set enemy types. Place <b>Cover Walls</b> for the player to hide behind. Win condition: survive 10 waves!</p>`;
+      L.defWaveSize=L.defWaveSize||6; L.defEnemySpeed=L.defEnemySpeed||1.0; L.defPowers=L.defPowers||{grenade:1,freeze:1,missile:1};
+      const dw=document.getElementById('lvl-def-wave'); if(dw) dw.value=L.defWaveSize;
+      const dsp=document.getElementById('lvl-def-speed'); if(dsp) dsp.value=L.defEnemySpeed;
+      const dgr=document.getElementById('lvl-def-grenade'); if(dgr) dgr.value=L.defPowers.grenade||1;
+      const dfr=document.getElementById('lvl-def-freeze'); if(dfr) dfr.value=L.defPowers.freeze||1;
+      const dmi=document.getElementById('lvl-def-missile'); if(dmi) dmi.value=L.defPowers.missile||1;
     } else if (this.project.genre==='sandbox') {
       extra.innerHTML=`
       <div class="mini-badge">Game Logic / Rules</div>
@@ -2318,6 +2622,14 @@ const App = {
       const fs=document.getElementById('lvl-fall-speed'); if(fs) L.fallSpeed=Number(fs.value)||2.5;
       const sr=document.getElementById('lvl-spawn-rate'); if(sr) L.spawnRate=Number(sr.value)||1.2;
       const gt=document.getElementById('lvl-game-time'); if(gt) L.gameTime=Number(gt.value)||60;
+    }
+    if(this.project.genre==='defender'){
+      const dw=document.getElementById('lvl-def-wave'); if(dw) L.defWaveSize=Number(dw.value)||6;
+      const dsp=document.getElementById('lvl-def-speed'); if(dsp) L.defEnemySpeed=Number(dsp.value)||1.0;
+      L.defPowers=L.defPowers||{};
+      const dgr=document.getElementById('lvl-def-grenade'); if(dgr) L.defPowers.grenade=Number(dgr.value)||0;
+      const dfr=document.getElementById('lvl-def-freeze'); if(dfr) L.defPowers.freeze=Number(dfr.value)||0;
+      const dmi=document.getElementById('lvl-def-missile'); if(dmi) L.defPowers.missile=Number(dmi.value)||0;
     }
     if(this.project.genre==='sandbox'){
       L.controls=L.controls||{}; L.logic=L.logic||{};
@@ -2544,6 +2856,7 @@ const App = {
     this.playInstance = runGame(document.getElementById('play-canvas'), JSON.parse(JSON.stringify(this.project)), {});
   },
   testLevel(){
+    this._skipAutoPlay = true; // prevent go('play') from auto-starting
     this.go('play');
     if(this.playInstance) this.playInstance.destroy();
     document.getElementById('play-controls-guide').textContent = Genres[this.project.genre].controls;
@@ -2552,37 +2865,62 @@ const App = {
 
   requestNewProject(){
     if(this.project && this.dirty){
-      const ok=confirm('You have unsaved progress. Save before creating a new project?\n\nOK = Save and continue\nCancel = Stay here');
-      if(!ok) return;
-      this.saveProject(true);
+      const ok=confirm('You have unsaved changes. Save your project file before starting a new one?\n\nOK = Save file and continue\nCancel = Discard changes and continue');
+      if(ok) this.saveProject();
     }
+    this.project=null; this.dirty=false;
+    this.setNavEnabled(false);
+    this.updateProjectStatus();
     this.go('new');
   },
 
   /* ---- save / load / export ---- */
-  saveProject(silent){
-    const ok=SaveManager.save(this.project);
-    if(ok){ this.dirty=false; this.updateProjectStatus(); }
-    if(!silent) this.toast(ok ? 'Project saved locally ✓' : 'Save failed — storage unavailable');
-    return ok;
+  saveProject(){
+    if(!this.project) return this.toast('No active project to save');
+    SaveManager.autosave(this.project);
+    SaveManager.downloadJSON(this.project);
+    this.dirty=false; this.updateProjectStatus();
+    this.toast('Project saved as .spells file ✓');
   },
-  loadProject(silentIfMissing){
-    const p=SaveManager.load();
-    if(!p){ if(!silentIfMissing) this.toast('No saved project found'); return; }
+  loadProjectFromFile(){
+    const input = document.createElement('input');
+    input.type='file'; input.accept='.spells,.json';
+    input.onchange = e => {
+      const file = e.target.files&&e.target.files[0]; if(!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const p = SaveManager.parseFile(ev.target.result);
+        if(!p||!p.genre||!p.levels){ return this.toast('Invalid project file — not a SPELLS project'); }
+        // Validate genre still exists
+        if(!Genres[p.genre]){ return this.toast('This project uses a genre that no longer exists: '+p.genre); }
+        this._applyProject(p);
+        this.toast('Project "'+p.title+'" loaded ✓');
+      };
+      reader.readAsText(file);
+    };
+    input.click();
+  },
+  loadAutosave(){
+    const p = SaveManager.loadAutosave();
+    if(!p) return;
+    if(!Genres[p.genre]) return; // stale genre, skip silently
+    this._applyProject(p);
+  },
+  _applyProject(p){
     this.project=p;
     this.dirty=false;
     this.setNavEnabled(true);
     Editor.levelIdx=0; Editor.selected=null; Editor.setTool('select'); Editor.renderTools();
     this.renderLevelList(); this.syncLevelFields(); this.syncScreenFields(); this.syncProjectFields();
     this.renderCharacters(); this.renderInspector(); this.renderAssets();
-    document.getElementById('char-name').value=p.character.name;
-    document.getElementById('char-color').value=p.character.color;
-    document.getElementById('ed-genre-badge').textContent = Genres[p.genre].icon+' '+Genres[p.genre].name;
-    document.getElementById('ed-mode-badge').textContent = p.startMode==='template' ? '🧩 Template start' : '⬜ Scratch start';
+    const cn=document.getElementById('char-name'); if(cn) cn.value=p.character.name;
+    const cc=document.getElementById('char-color'); if(cc) cc.value=p.character.color;
+    const gb=document.getElementById('ed-genre-badge'); if(gb) gb.textContent = Genres[p.genre].icon+' '+Genres[p.genre].name;
+    const mb=document.getElementById('ed-mode-badge'); if(mb) mb.textContent = p.startMode==='template' ? '🧩 Template start' : '⬜ Scratch start';
     this.go('editor'); Editor.draw();
-    this.toast('Project loaded ✓');
   },
   exportHTML(){
+    if(!this.project) return this.toast('No active project');
     ExportManager.download(this.project);
     this.toast('Exporting "'+this.project.title+'"…');
   }
